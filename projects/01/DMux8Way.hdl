@@ -15,4 +15,11 @@ CHIP DMux8Way {
 
     PARTS:
     //// Replace this comment with your code.
+
+    // selの3桁目で分類
+    DMux(in = in, sel = sel[2], a = a3o, b = b3o);
+
+    DMux4Way(in = a3o, sel = sel[0..1], a = a, b = b, c = c, d = d);
+    DMux4Way(in = b3o, sel = sel[0..1], a = e, b = f, c = g, d = h);
+    
 }
