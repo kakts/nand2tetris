@@ -14,5 +14,38 @@ CHIP DMux4Way {
     OUT a, b, c, d;
 
     PARTS:
-    //// Replace this comment with your code.
+    //// Replace this comment with your code
+
+    Not(in = sel[0], out = out1);
+    Not(in = sel[1], out = out2);
+
+    // 4つのうち1つの出力先のみtrueになるフラグをa,b,c,d4つ用意
+    And (a = out1, b = out2, out = isA);
+    And (a = sel[0], b = out2, out = isB);
+    And (a = out1, b = sel[1], out = isC);
+    And (a = sel[0], b = sel[1], out = isD);
+
+
+    // a
+    And (a = in, b = isA, out = a);
+
+    // b
+    And (a = in, b = isB, out = b);
+
+    // c
+    And (a = in, b = isC, out = c);
+
+    // d
+    And (a = in, b = isD, out = d);
+
+    // /**
+    //  * 別解
+    //  */
+    // // 2桁目で分類
+    // Dmux(in = in, sel = sel[1], a = ao, b = bo);
+    // // 2桁目が0の場合
+    // Dmux(in = ao, sel = sel[0], a = a, b = b);
+    // // 2桁目が1の場合
+    // Dmux(in = bo, sel = sel[0], a = c, b = d);
+
 }
