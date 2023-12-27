@@ -13,5 +13,21 @@ CHIP RAM64 {
     OUT out[16];
 
     PARTS:
-    //// Replace this comment with your code.
+        // address 6bitの値をみて、8グループに分ける
+        // 6bit中、上位3bitでグループ分けする
+        // どのグループで書き込みをするか
+        DMux8Way(in=load, sel= address[3..5], a= loadg0, b= loadg1, c= loadg2, d= loadg3, e= loadg4, f= loadg5, g=loadg6, h=loadg7);
+        
+        // 8グループ分のメモリ 下位3bitでRAM8のアドレスを指定する
+        RAM8(in=in, load=loadg0, address=address[0..2], out=routg0);
+        RAM8(in=in, load=loadg1, address=address[0..2], out=routg1);
+        RAM8(in=in, load=loadg2, address=address[0..2], out=routg2);
+        RAM8(in=in, load=loadg3, address=address[0..2], out=routg3);
+        RAM8(in=in, load=loadg4, address=address[0..2], out=routg4);
+        RAM8(in=in, load=loadg5, address=address[0..2], out=routg5);
+        RAM8(in=in, load=loadg6, address=address[0..2], out=routg6);
+        RAM8(in=in, load=loadg7, address=address[0..2], out=routg7);
+
+        // 最終的な出力
+        Mux8Way16(a= routg0, b= routg1, c= routg2, d= routg3, e= routg4, f=routg5, g= routg6, h= routg7, sel= address[3..5], out= out);
 }
