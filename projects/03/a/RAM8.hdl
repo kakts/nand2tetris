@@ -13,5 +13,23 @@ CHIP RAM8 {
     OUT out[16];
 
     PARTS:
-    //// Replace this comment with your code.
+        // どのアドレスに出力するか
+        DMux8Way16(in= in, sel=address, a= dout0, b= dout1, c= dout2, d= dout3, e= dout4, f= dout5, g= dout6, h= dout7);
+        
+        // どのレジスターにロードするか
+        DMux8Way(in=load, sel=address, a= load0, b= load1, c= load2, d= load3, e= load4, f= load5, g= load6, h=load7);
+        
+        
+        // 8つ分のレジスター
+        Register(in= dout0, load= load0, out=rout0);
+        Register(in= dout1, load= load1, out=rout1);
+        Register(in= dout2, load= load2, out=rout2);
+        Register(in= dout3, load= load3, out=rout3);
+        Register(in= dout4, load= load4, out=rout4);
+        Register(in= dout5, load= load5, out=rout5);
+        Register(in= dout6, load= load6, out=rout6);
+        Register(in= dout7, load= load7, out=rout7);
+
+        // Mux8Way16で、指定したアドレスのレジスターの値をoutする
+        Mux8Way16(a= rout0, b= rout1, c= rout2, d= rout3, e= rout4, f= rout5, g= rout6, h= rout7, sel= address, out=out);  
 }
