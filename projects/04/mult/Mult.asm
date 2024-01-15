@@ -8,9 +8,12 @@
 // (R0, R1, R2 refer to RAM[0], RAM[1], and RAM[2], respectively.)
 
 //// Replace this comment with your code.
+// R0 * R1
+// R0 を R1回足すことで実現する
+// R1回のループを回す
 
     @R2
-    M=0 // 計算結果
+    M=0 // 計算結果を0に初期化
 (LOOP)
     @R1
     D=M // D = R1 カウンタ
