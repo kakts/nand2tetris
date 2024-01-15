@@ -8,3 +8,23 @@
 // (R0, R1, R2 refer to RAM[0], RAM[1], and RAM[2], respectively.)
 
 //// Replace this comment with your code.
+
+    @R2
+    M=0 // 計算結果
+(LOOP)
+    @R1
+    D=M // D = R1 カウンタ
+    @END
+    D;JLE // R1が0以下になったらEND
+    @R0
+    D=M // D = R0
+    @R2
+    M=D+M // D + R0 // 
+    @R1
+    M=M-1 // i=i-1
+    @LOOP
+    0;JMP // LOOPへ移動
+(END)
+    @END
+    0;JMP // 無限ループ
+
